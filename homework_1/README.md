@@ -4,7 +4,7 @@ Run docker with the `python:3.13` image. Use an entrypoint `bash` to interact wi
 
 What's the version of `pip` in the image?
 
-+ 25.3 
+- [x] 25.3 
 - 24.3.1
 - 24.2.1
 - 23.3.1
@@ -49,37 +49,22 @@ volumes:
 - postgres:5433
 - localhost:5432
 - db:5433
-+ postgres:5432
-+ db:5432
+- [x] postgres:5432
+- [x] db:5432
 
 If multiple answers are correct, select any 
-
-
-## Prepare the Data
-
-Download the green taxi trips data for November 2025:
-
-```bash
-wget https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2025-11.parquet
-```
-
-You will also need the dataset with zones:
-
-```bash
-wget https://github.com/DataTalksClub/nyc-tlc-data/releases/download/misc/taxi_zone_lookup.csv
-```
 
 ## Question 3. Counting short trips
 
 For the trips in November 2025 (lpep_pickup_datetime between '2025-11-01' and '2025-12-01', exclusive of the upper bound), how many trips had a `trip_distance` of less than or equal to 1 mile?
 
 - 7,853
-+ 8,007
+- [x] 8,007
 - 8,254
 - 8,421
 
 
-Answer: 
+Query: 
 ```sql
 SELECT
 	count(1) as "count"
@@ -98,12 +83,12 @@ Which was the pick up day with the longest trip distance? Only consider trips wi
 
 Use the pick up time for your calculations.
 
-+ 2025-11-14
+- [x] 2025-11-14
 - 2025-11-20
 - 2025-11-23
 - 2025-11-25
 
-Answer: 
+Query: 
 ```sql
 SELECT
 	DATE("lpep_pickup_datetime") AS "day with longest trip"
@@ -118,12 +103,12 @@ LIMIT 1;
 
 Which was the pickup zone with the largest `total_amount` (sum of all trips) on November 18th, 2025?
 
-+ East Harlem North
+- [x] East Harlem North
 - East Harlem South
 - Morningside Heights
 - Forest Hills
 
-Answer: 
+Query: 
 ```sql
 SELECT
 	z."Zone",
@@ -146,11 +131,11 @@ For the passengers picked up in the zone named "East Harlem North" in November 2
 Note: it's `tip` , not `trip`. We need the name of the zone, not the ID.
 
 - JFK Airport
-+ Yorkville West
+- [x] Yorkville West
 - East Harlem North
 - LaGuardia Airport
 
-Answer: 
+Query: 
 ```sql
 SELECT
 	zdo."Zone",
@@ -170,17 +155,6 @@ LIMIT 1;
 ```
 PS: `Upper East Side North` was the Drop-off zone with the largest tip.
 
-## Terraform
-
-In this section homework we'll prepare the environment by creating resources in GCP with Terraform.
-
-In your VM on GCP/Laptop/GitHub Codespace install Terraform.
-Copy the files from the course repo
-[here](../../../01-docker-terraform/terraform/terraform) to your VM/Laptop/GitHub Codespace.
-
-Modify the files as necessary to create a GCP Bucket and Big Query Dataset.
-
-
 ## Question 7. Terraform Workflow
 
 Which of the following sequences, respectively, describes the workflow for:
@@ -192,5 +166,5 @@ Answers:
 - terraform import, terraform apply -y, terraform destroy
 - teraform init, terraform plan -auto-apply, terraform rm
 - terraform init, terraform run -auto-approve, terraform destroy
-+ terraform init, terraform apply -auto-approve, terraform destroy
+- [x] terraform init, terraform apply -auto-approve, terraform destroy
 - terraform import, terraform apply -y, terraform rm
