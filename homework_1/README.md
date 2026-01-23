@@ -9,6 +9,12 @@ What's the version of `pip` in the image?
 - 24.2.1
 - 23.3.1
 
+Commands:
+```bash
+docker run -it --rm --entrypoint=bash python:3.13
+
+pip --version
+```
 
 ## Question 2. Understanding Docker networking and docker-compose
 
