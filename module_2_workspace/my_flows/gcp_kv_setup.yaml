@@ -1,0 +1,28 @@
+id: gcp_kv_setup
+namespace: zoomcamp.seyi
+
+tasks:
+  - id: set_project_id
+    type: io.kestra.plugin.core.kv.Set
+    key: GCP_PROJECT_ID
+    value: tactile-zephyr-485019-m2
+    kvType: STRING
+    
+  - id: set_location
+    type: io.kestra.plugin.core.kv.Set
+    key: GCP_LOCATION
+    value: europe-west2
+    kvType: STRING
+    
+  - id: set_bucket_name
+    type: io.kestra.plugin.core.kv.Set
+    key: GCP_BUCKET_NAME
+    value: tactile-zephyr-485019-m2-zoomcamp-bucket
+    kvType: STRING
+    
+  - id: set_dataset_name
+    type: io.kestra.plugin.core.kv.Set
+    key: GCP_DATASET
+    value: zoomcamp_dataset
+    kvType: STRING
+    

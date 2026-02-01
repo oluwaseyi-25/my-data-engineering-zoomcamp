@@ -1,0 +1,53 @@
+id: first_pipeline
+namespace: zoomcamp.seyi
+
+inputs:
+  - id: columns_to_keep
+    type: ARRAY
+    itemType: STRING
+    defaults:
+      - brand
+      - price
+
+tasks:
+  - id: extract
+    type: io.kestra.plugin.core.http.Download
+    uri: https://dummyjson.com/products
+
+  - id: transform
+    type: io.kestra.plugin.scripts.python.Script
+    inputFiles: 
+      data.json: "{{outputs.extract.uri}}"
+    outputFiles:
+      - "*.json"
+    env:
+      COLUMNS_TO_KEEP: "{{inputs.columns_to_keep}}"
+    script: |
+      import json
+      import os
+
+      columns_to_keep = json.loads(os.getenv("COLUMNS_TO_KEEP"))
+
+      with open("data.json", "r") as json_file:
+        input_data = json.load(json_file)
+
+      filtered_data = [
+          {column: product.get(column, "NULL") for column in columns_to_keep}
+          for product in input_data["products"]
+      ]
+
+      with open('products.json', 'w') as output_file:
+        json.dump(filtered_data, output_file, indent=4)
+
+  - id: query
+    type: io.kestra.plugin.jdbc.duckdb.Queries
+    inputFiles:
+      products.json: "{{outputs.transform.outputFiles['products.json']}}"
+    sql: |
+      INSTALL json;
+      LOAD json;
+      SELECT brand, ROUND(AVG(price), 2) as avg_price
+      FROM read_json_auto('{{workingDir}}/products.json')
+      GROUP BY brand
+      ORDER BY avg_price DESC;
+    fetchType: STORE

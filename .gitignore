@@ -1,5 +1,6 @@
 *.parquet
 keys/
+.env_encoded
 
 
 # Byte-compiled / optimized / DLL files
