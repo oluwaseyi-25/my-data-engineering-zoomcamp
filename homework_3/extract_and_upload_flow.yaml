@@ -15,7 +15,7 @@ variables:
 tasks:
   - id: for_each
     type: io.kestra.plugin.core.flow.ForEach
-    values: ["01", "02", "03", "04", "05", "06", "07"]
+    values: ["01", "02", "03", "04", "05", "06"]
     tasks:
       - id: set_labels
         type: io.kestra.plugin.core.execution.Labels
