@@ -1,0 +1,11 @@
+
+version: 2
+
+sources:
+  - name: raw_data
+    description: "Raw data sources for taxi_rides"
+    database: dbt_zoomcamp
+    schema: prod
+    tables:
+      - name: yellow_tripdata
+      - name: green_tripdata
