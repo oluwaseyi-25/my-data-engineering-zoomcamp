@@ -1,0 +1,1 @@
+select * from {{ ref("taxi_zones_lut") }}
