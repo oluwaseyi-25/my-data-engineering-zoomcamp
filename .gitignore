@@ -8,6 +8,7 @@ keys/
 .env_encoded
 data/
 *.parquet.crc
+.vscode
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
